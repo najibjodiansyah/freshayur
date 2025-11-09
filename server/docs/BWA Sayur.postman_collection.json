@@ -1,0 +1,1401 @@
+{
+	"info": {
+		"_postman_id": "c1e97059-8197-4bdf-ac6c-495fd44d5ffe",
+		"name": "BWA Sayur",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2193265"
+	},
+	"item": [
+		{
+			"name": "User Service",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Sign In",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"",
+											"token  = jsonData.data.access_token?? \"\";",
+											"",
+											"pm.collectionVariables.set(\"access_token\", token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"superadmin@mail.com\",\n    \"password\": \"admin123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{user_service_host}}/signin",
+									"host": [
+										"{{user_service_host}}"
+									],
+									"path": [
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sign Up",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Danang 11\",\n    \"email\": \"danang11@mail.com\",\n    \"password\": \"danang123\",\n    \"password_confirmation\": \"danang123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{user_service_host}}/signup",
+									"host": [
+										"{{user_service_host}}"
+									],
+									"path": [
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Forgot Password",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"danang5@mail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{user_service_host}}/forgot-password",
+									"host": [
+										"{{user_service_host}}"
+									],
+									"path": [
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify Account",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{user_service_host}}/verify-account?token=ab3f0ea5-a5a7-4877-b31c-5a5cb0b1fb13",
+									"host": [
+										"{{user_service_host}}"
+									],
+									"path": [
+										"verify-account"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "ab3f0ea5-a5a7-4877-b31c-5a5cb0b1fb13"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Password No Auth",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password_new\": \"123456789\",\n    \"password_confirmation\": \"123456789\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{user_service_host}}/update-password?token=d9841b20-f568-4d88-8c02-7d0ee59bd4e8",
+									"host": [
+										"{{user_service_host}}"
+									],
+									"path": [
+										"update-password"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "d9841b20-f568-4d88-8c02-7d0ee59bd4e8"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "Get Profile",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzkwODg4MzAsImlzcyI6InNlY3JldCIsInVzZXJfaWQiOjh9.lvqFJ_wXCpsT3zC6U-IIsHUXDgKNWM74cvuM-t1XxTw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{user_service_host}}/admin/profile",
+									"host": [
+										"{{user_service_host}}"
+									],
+									"path": [
+										"admin",
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload Image Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzkxMTU1NjUsImlzcyI6InNlY3JldCIsInVzZXJfaWQiOjh9.Y5_r8KbuuKMMigPBclzAF1mZaEbtpkWb2KTxoNIkJtY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/Users/humamalamin/Downloads/bwa-blog-thumbnail.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{user_service_host}}/auth/profile/image-upload",
+									"host": [
+										"{{user_service_host}}"
+									],
+									"path": [
+										"auth",
+										"profile",
+										"image-upload"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Role",
+					"item": [
+						{
+							"name": "Get All",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDA1NTUxNzYsImlzcyI6InNlY3JldCIsInVzZXJfaWQiOjN9.LVj9OZdmhu4l4nyLB2IlJYLwzgvzYxT5nY0M7OIRvpY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{user_service_host}}/admin/roles",
+									"host": [
+										"{{user_service_host}}"
+									],
+									"path": [
+										"admin",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Customer",
+					"item": [
+						{
+							"name": "Get All",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{user_service_host}}/admin/customers?limit=10&page=1&search=&order_by=name&order_type=asc",
+									"host": [
+										"{{user_service_host}}"
+									],
+									"path": [
+										"admin",
+										"customers"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "order_by",
+											"value": "name"
+										},
+										{
+											"key": "order_type",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{user_service_host}}/admin/customers/:id",
+									"host": [
+										"{{user_service_host}}"
+									],
+									"path": [
+										"admin",
+										"customers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "9"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"test customer 2\",\n    \"email\": \"testcustomer2@mail.com\",\n    \"password\": \"qwerty12345\",\n    \"password_confirmation\": \"qwerty12345\",\n    \"phone\": \"08589192121\",\n    \"address\": \"Jalan Panjang Indonesia\",\n    \"lat\": 107.01,\n    \"lng\": -6.120,\n    \"role_id\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{user_service_host}}/admin/customers",
+									"host": [
+										"{{user_service_host}}"
+									],
+									"path": [
+										"admin",
+										"customers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Product Service",
+			"item": [
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "Get All Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{product_service_host}}/admin/categories",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"admin",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Home",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{product_service_host}}/categories/home",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"categories",
+										"home"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By ID Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{product_service_host}}/admin/categories/:id",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By ID Admin Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{product_service_host}}/admin/categories/:id",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By Slug Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{product_service_host}}/admin/categories/:slug/slug",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										":slug",
+										"slug"
+									],
+									"variable": [
+										{
+											"key": "slug",
+											"value": "sayuran"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Rice\",\n    \"icon\": \"https://sdnnwvwdefoxcpdwbmra.supabase.co/storage/v1/object/public/bwa-sayur/public/uploads/category-beras.avif\",\n    \"status\": \"Published\",\n    \"description\": \"ini adalah buah-buahan\",\n    \"parent_id\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{product_service_host}}/admin/categories",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"admin",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Sayuran\",\n    \"icon\": \"https://sdnnwvwdefoxcpdwbmra.supabase.co/storage/v1/object/public/bwa-sayur/public/uploads/category-fruits-vegetables.jpg\",\n    \"status\": \"Published\",\n    \"description\": \"ini adalah sayur mayur segar\",\n    \"parent_id\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{product_service_host}}/admin/categories/:id",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"admin",
+										"categories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "Get All Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{product_service_host}}/admin/products?search=Sayuran&page=1&limit=10&orderBy=&categorySlug=&startPrice=1000&endPrice=10000&orderType=",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"admin",
+										"products"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "Sayuran"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "orderBy",
+											"value": ""
+										},
+										{
+											"key": "categorySlug",
+											"value": ""
+										},
+										{
+											"key": "startPrice",
+											"value": "1000"
+										},
+										{
+											"key": "endPrice",
+											"value": "10000"
+										},
+										{
+											"key": "orderType",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Product Shop",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{product_service_host}}/products/shop?search=&page=&limit=&orderBy=&categorySlug=sayuran&startPrice=&endPrice=&orderType=",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"products",
+										"shop"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "page",
+											"value": ""
+										},
+										{
+											"key": "limit",
+											"value": ""
+										},
+										{
+											"key": "orderBy",
+											"value": ""
+										},
+										{
+											"key": "categorySlug",
+											"value": "sayuran"
+										},
+										{
+											"key": "startPrice",
+											"value": ""
+										},
+										{
+											"key": "endPrice",
+											"value": ""
+										},
+										{
+											"key": "orderType",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By ID Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{product_service_host}}/admin/products/:id",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"admin",
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By ID Home",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{product_service_host}}/products/home/:id",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"products",
+										"home",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete By ID Admin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{product_service_host}}/admin/products/:id",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"admin",
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Product",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product_name\": \"Daging Sapi Import\",\n    \"category_slug\": \"chicken-&-meet\",\n    \"unit\": \"gram\",\n    \"product_description\": \"Daging Sapi Segar Premium adalah pilihan terbaik untuk hidangan berkualitas tinggi, dipotong dengan teknik profesional dan disimpan dalam suhu optimal untuk menjaga kesegaran, kelembutan, serta cita rasa aslinya. Daging sapi kami berasal dari ternak sehat yang dipelihara secara alami, kaya akan protein, zat besi, vitamin B12, dan nutrisi penting untuk mendukung energi, pertumbuhan otot, dan kesehatan tubuh.Keunggulan Produk:✅ Kualitas Premium: Dipotong higienis, tekstur lembut, dan bebas dari bahan pengawet.✅ Kaya Nutrisi: Sumber protein tinggi, zat besi, zinc, dan vitamin B kompleks untuk stamina dan pemulihan otot.✅ Serbaguna: Cocok untuk steak, rendang, semur, bakso, sate, atau hidangan lainnya.✅ Segar & Aman: Proses distribusi cepat dengan cold chain system untuk menjaga kesegaran.Tips Penyimpanan:Simpan di freezer (-18°C) untuk penyimpanan jangka panjang.Cairkan secara alami di kulkas bawah sebelum dimasak untuk mempertahankan kelembutan.Nikmati hidangan lezat dan bergizi dengan Daging Sapi Segar Premium untuk santapan keluarga yang istimewa!Tersedia dalam berbagai potongan (sirloin, tenderloin, daging giling, iga, dll.) dan kemasan vakum yang praktis.Pesan sekarang dan dapatkan kualitas daging terbaik!\",\n    \"status\": \"ACTIVE\",\n    \"variant\": 2,\n    \"variant_detail\": [\n        {\n            \"stock\": 10,\n            \"weight\": 250,\n            \"product_image\": \"https://sdnnwvwdefoxcpdwbmra.supabase.co/storage/v1/object/public/bwa-sayur/public/uploads/kangkung.jpg\",\n            \"sale_price\": 70000,\n            \"reguler_price\": 65000\n        },\n        {\n            \"stock\": 10,\n            \"weight\": 500,\n            \"product_image\": \"https://sdnnwvwdefoxcpdwbmra.supabase.co/storage/v1/object/public/bwa-sayur/public/uploads/kangkung.jpg\",\n            \"sale_price\": 100000,\n            \"reguler_price\": 80000\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{product_service_host}}/admin/products",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"admin",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Category Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product_name\": \"Sayur Bayam-bayam\",\n    \"category_slug\": \"sayuran\",\n    \"unit\": \"gram\",\n    \"product_description\": \"ini adalah buah-buahan\",\n    \"status\": \"ACTIVE\",\n    \"variant\": 2,\n    \"variant_detail\": [\n        {\n            \"stock\": 10,\n            \"weight\": 250,\n            \"product_image\": \"https://google.com\",\n            \"sale_price\": 3000,\n            \"reguler_price\": 3500\n        },\n        {\n            \"stock\": 10,\n            \"weight\": 500,\n            \"product_image\": \"https://google.com\",\n            \"sale_price\": 3500,\n            \"reguler_price\": 4000\n        }\n\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{product_service_host}}/admin/products/:id",
+									"host": [
+										"{{product_service_host}}"
+									],
+									"path": [
+										"admin",
+										"products",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Upload Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/humamalamin/Downloads/bwa-blog-thumbnail (1).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{product_service_host}}/admin/image-upload",
+							"host": [
+								"{{product_service_host}}"
+							],
+							"path": [
+								"admin",
+								"image-upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order Service",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"buyer_id\": 10,\n    \"order_date\": \"2025-04-16\",\n    \"total_amount\": 6000,\n    \"shipping_type\": \"Delivery\",\n    \"remarks\": \"\",\n    \"order_time\": \"12:01:01\",\n    \"order_details\": [\n        {\n            \"product_id\": 13,\n            \"quantity\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{order_service_host}}/auth/orders?lat=-6.247017&lng=106.7591304",
+							"host": [
+								"{{order_service_host}}"
+							],
+							"path": [
+								"auth",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "-6.247017"
+								},
+								{
+									"key": "lng",
+									"value": "106.7591304"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"remarks\": \"\",\n    \"status\": \"Confirmed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{order_service_host}}/admin/orders/:id/status",
+							"host": [
+								"{{order_service_host}}"
+							],
+							"path": [
+								"admin",
+								"orders",
+								":id",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{order_service_host}}/admin/orders",
+							"host": [
+								"{{order_service_host}}"
+							],
+							"path": [
+								"admin",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{order_service_host}}/auth/orders",
+							"host": [
+								"{{order_service_host}}"
+							],
+							"path": [
+								"auth",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{order_service_host}}/admin/orders/:id",
+							"host": [
+								"{{order_service_host}}"
+							],
+							"path": [
+								"admin",
+								"orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{order_service_host}}/auth/orders/:id",
+							"host": [
+								"{{order_service_host}}"
+							],
+							"path": [
+								"auth",
+								"orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment Service",
+			"item": [
+				{
+					"name": "Create Payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"order_id\": 7,\n    \"gross_amount\": 11000,\n    \"user_id\": 10,\n    \"remarks\": \"\",\n    \"payment_method\": \"midtrans\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{payment_service_host}}/auth/payments",
+							"host": [
+								"{{payment_service_host}}"
+							],
+							"path": [
+								"auth",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{payment_service_host}}/auth/payments",
+							"host": [
+								"{{payment_service_host}}"
+							],
+							"path": [
+								"auth",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{payment_service_host}}/auth/payments/:id",
+							"host": [
+								"{{payment_service_host}}"
+							],
+							"path": [
+								"auth",
+								"payments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "user_service_host",
+			"value": "http://localhost:8090",
+			"type": "string"
+		},
+		{
+			"key": "product_service_host",
+			"value": "http://localhost:8082",
+			"type": "string"
+		},
+		{
+			"key": "order_service_host",
+			"value": "http://localhost:8083",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "payment_service_host",
+			"value": "http://localhost:8084",
+			"type": "string"
+		}
+	]
+}
